@@ -9,7 +9,7 @@ from utils import *
 
 parser = argparse.ArgumentParser(description='command line options')
 parser.add_argument('--model_name', action="store", dest="model_name", default='DQN', help="model name")
-parser.add_argument('--stock_name', action="store", dest="stock_name", default='^GSPC_2010-2015', help="stock name")
+parser.add_argument('--stock_name', action="store", dest="stock_name", default='BTC_2014-2018', help="stock name")
 parser.add_argument('--window_size', action="store", dest="window_size", default=10, type=int, help="span (days) of observation")
 parser.add_argument('--num_episode', action="store", dest="num_episode", default=10, type=int, help='episode number')
 parser.add_argument('--initial_balance', action="store", dest="initial_balance", default=50000, type=int, help='initial balance')
@@ -60,6 +60,8 @@ def sell(t):
 logging.basicConfig(filename=f'logs/{model_name}_training_{stock_name}.log', filemode='w',
                     format='[%(asctime)s.%(msecs)03d %(filename)s:%(lineno)3s] %(message)s', 
                     datefmt='%m/%d/%Y %H:%M:%S', level=logging.INFO)
+logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
+
 
 logging.info(f'Trading Object:           {stock_name}')
 logging.info(f'Trading Period:           {trading_period} days')
